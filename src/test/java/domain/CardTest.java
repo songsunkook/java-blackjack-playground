@@ -7,20 +7,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import javax.smartcardio.Card;
-
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @DisplayName("카드 ")
 public class CardTest {
     @ParameterizedTest
     @DisplayName("이름을 정확하게 불러오는가")
     @MethodSource("getCardNameArguments")
-    public void getCardNameTest(int cardNumber, String cardMark, String displayName) {
-        assertThat(Card(cardNumber, cardMark).getCardName(), displayName);
+    public void getCardNameTest(int cardNumber, Mark cardMark, String displayName) {
+        assertEquals(new Card(cardNumber, cardMark).getCardName(), displayName);
     }
 
     private Stream<Arguments> getCardNameArguments() {
