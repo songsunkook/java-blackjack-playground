@@ -1,4 +1,4 @@
-package constant;
+package constant.card;
 
 public enum Mark {
     DIAMOND("다이아몬드"),
