@@ -3,7 +3,6 @@ package domain;
 import constant.card.Mark;
 import constant.card.Number;
 
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Card {
@@ -16,7 +15,7 @@ public class Card {
     }
 
     public String getCardName() {
-        return getNumber() + mark.name();
+        return getNumber() + getMarkName();
     }
 
     private String getNumber() {
@@ -30,5 +29,13 @@ public class Card {
             return Character.toString(result);
         }
         return Integer.toString(number);
+    }
+
+    private String getMarkName() {
+        return Stream.of(Mark.values())
+                .filter(markElemnet -> markElemnet == mark)
+                .findFirst()
+                .get()
+                .getMessage();
     }
 }
