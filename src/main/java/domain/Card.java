@@ -15,10 +15,10 @@ public class Card {
     }
 
     public String getCardName() {
-        return getNumber() + getMarkName();
+        return getNumberName() + getMarkName();
     }
 
-    private String getNumber() {
+    private String getNumberName() {
         if (number == 1 || number > 10) {
             char result = Stream.of(Number.values())
                     .filter(numberElement -> numberElement.getNumber() == number)
@@ -37,5 +37,9 @@ public class Card {
                 .findFirst()
                 .get()
                 .getMessage();
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

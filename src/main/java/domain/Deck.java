@@ -18,6 +18,12 @@ public class Deck {
         return cards.get(index).getCardName();
     }
 
+    public int getTotalNumber() {
+        return cards.stream()
+                .mapToInt(Card::getNumber)
+                .sum();
+    }
+
     public void drawCard(int amount) {
         IntStream.range(0, amount).forEach(i -> addCard(randomCard()));
     }
