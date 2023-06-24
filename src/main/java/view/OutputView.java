@@ -3,18 +3,14 @@ package view;
 import java.util.Arrays;
 
 public class OutputView {
-    public static void println() {
+    public static void println(Object... args) {
+        print(args);
         System.out.println();
     }
 
-    public static void println(String message) {
-        System.out.println(message);
-    }
-
-    public static void println(Object... args) {
+    public static void print(Object... args) {
         for (Object obj : args) {
             System.out.print(obj + " ");
         }
-        System.out.println();
     }
 }

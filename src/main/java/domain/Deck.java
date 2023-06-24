@@ -40,4 +40,8 @@ public class Deck {
     public int size() {
         return cards.size();
     }
+
+    public int getCardNumber(int index) {
+        return cards.get(index).getNumber();
+    }
 }

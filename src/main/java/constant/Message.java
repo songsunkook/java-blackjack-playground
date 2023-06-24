@@ -9,7 +9,7 @@ public enum Message {
     DEALER_ONE_MORE_CARD("%s는 16이하라 한장의 카드를 더 받았습니다."),
     FINAL_PROFIT("## 최종 수익"),
 
-    RESULT("%s - 결과%s %d"),
+    RESULT(" - 결과%s %d"),
     DEALER("딜러"),
     CARD("카드"),
     DELIMITER(":"),
@@ -42,16 +42,16 @@ public enum Message {
         return message;
     }
 
-    public String getMessage(String name1, String name2) {
-        if (message.equals(HAND_OUT_CARDS.getMessage())) {
-            return String.format(message, DEALER.getMessage(), name1, name2);
+    public String getMessage(int amount) {
+        if (message.equals(RESULT.getMessage())) {
+            return String.format(message, DELIMITER.getMessage(), amount);
         }
         return message;
     }
 
-    public String getMessage(String name, int amount) {
-        if (message.equals(RESULT.getMessage())) {
-            return String.format(message, name, DELIMITER.getMessage(), amount);
+    public String getMessage(String name1, String name2) {
+        if (message.equals(HAND_OUT_CARDS.getMessage())) {
+            return String.format(message, DEALER.getMessage(), name1, name2);
         }
         return message;
     }

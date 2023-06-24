@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.stream.IntStream;
+
 public class Person {
     protected Name name;
     protected Deck deck = new Deck();
@@ -34,10 +36,22 @@ public class Person {
     }
 
     public boolean survive() {
-        return deck.getTotalNumber() < 21;
+        return deck.getTotalNumber() <= 21;
     }
 
     public boolean blackJack() {
         return deck.getTotalNumber() == 21;
+    }
+
+    public int getTotalNumber() {
+        int result = deck.getTotalNumber();
+        if (result == 11) {
+            for (int i = 0; i < deck.size(); i++) {
+                if (deck.getCardNumber(i) == 1) {
+                    return 21;
+                }
+            }
+        }
+        return result;
     }
 }

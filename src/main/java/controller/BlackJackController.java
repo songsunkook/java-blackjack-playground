@@ -19,6 +19,7 @@ public class BlackJackController {
         setPerson();
         divideTwoCards();
         oneMoreCards();
+        totalResults();
     }
 
     private void setPerson() {
@@ -52,7 +53,10 @@ public class BlackJackController {
     private void divideTwoCards() {
         OutputView.println(Message.HAND_OUT_CARDS.getMessage(person.get(1).getName(), person.get(2).getName()));
         person.forEach(user -> user.drawCard(2));
-        IntStream.range(0, person.size()).forEach(this::outputCards);
+        IntStream.range(0, person.size()).forEach(i -> {
+            outputCards(i);
+            OutputView.println();
+        });
         OutputView.println();
     }
 
@@ -63,7 +67,7 @@ public class BlackJackController {
                 .collect(Collectors.joining());
         cards = cards.substring(0, cards.length() - 2);
 
-        OutputView.println(
+        OutputView.print(
                 person.get(userIndex).getName(),
                 Message.CARD.getMessage(),
                 Message.DELIMITER.getMessage(),
@@ -82,15 +86,16 @@ public class BlackJackController {
 
     private void oneMoreCard(int index) {
         do {
-             OutputView.println(Message.INPUT_ONE_MORE_CARD.getMessage(person.get(index).getName()));
-             if (!InputView.inputOneMoreCard()) {
-                 break;
-             }
-             person.get(index).drawCard(1);
-             outputCards(index);
+            OutputView.println(Message.INPUT_ONE_MORE_CARD.getMessage(person.get(index).getName()));
+            if (!InputView.inputOneMoreCard()) {
+                break;
+            }
+            person.get(index).drawCard(1);
+            outputCards(index);
+            OutputView.println();
         } while (person.get(index).survive());
 
-        if(!person.get(index).survive()) {
+        if (!person.get(index).survive()) {
             OutputView.println(Message.GAME_OVER.getMessage(person.get(index).getName()));
         }
     }
@@ -99,5 +104,17 @@ public class BlackJackController {
         OutputView.println(Message.DEALER_ONE_MORE_CARD.getMessage());
         person.get(0).drawCard(1);
         OutputView.println();
+    }
+
+    private void totalResults() {
+        totalResult(0);
+        totalResult(1);
+        totalResult(2);
+        OutputView.println();
+    }
+
+    private void totalResult(int index) {
+        outputCards(index);
+        OutputView.println(Message.RESULT.getMessage(person.get(index).getTotalNumber()));
     }
 }
