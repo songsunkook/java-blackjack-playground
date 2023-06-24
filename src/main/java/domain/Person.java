@@ -1,9 +1,13 @@
 package domain;
 
 public class Person {
-    protected Name name = new Name();
+    protected Name name;
     protected Deck deck = new Deck();
     protected Wallet wallet;
+
+    public void setName(String name) {
+        this.name = new Name(name);
+    }
 
     public void setMoney(int money) {
         wallet = new Wallet(money);
