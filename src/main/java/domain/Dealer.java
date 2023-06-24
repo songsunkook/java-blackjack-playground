@@ -8,4 +8,9 @@ public class Dealer extends Person {
     public void win(int money) {
         wallet.win(money);
     }
+
+    public void firstTurnBlackJackFrom(boolean theSameTime, int money) {
+        wallet.firstTurnBlackJackFrom(theSameTime, money);
+    }
+
 }

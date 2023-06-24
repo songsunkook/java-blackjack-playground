@@ -13,11 +13,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BlackJackController {
-    List<Person> person = new ArrayList<>();
+    private List<Person> person = new ArrayList<>();
 
     public void startGame() {
         setPerson();
         divideTwoCards();
+        checkBlackJacks();
         oneMoreCards();
         totalResults();
         finalProfits();
@@ -75,6 +76,26 @@ public class BlackJackController {
                 Message.DELIMITER.getMessage(),
                 cards
         );
+    }
+
+    private void checkBlackJacks() {
+        checkBlackJack(1);
+        checkBlackJack(2);
+    }
+
+    private void checkBlackJack(int index) {
+        int playerCardNumber = person.get(index).getTotalNumber();
+        int dealerCardNumber = person.get(0).getTotalNumber();
+        int playerMoney = person.get(index).getMoney();
+
+        if (playerCardNumber == 21) {
+            if (dealerCardNumber == 21) {
+                person.get(index).firstTurnBlackJackFrom(true);
+                ((Dealer)person.get(index)).firstTurnBlackJackFrom(true, playerMoney);
+            }
+            person.get(index).firstTurnBlackJackFrom(false);
+            ((Dealer)person.get(index)).firstTurnBlackJackFrom(false, playerMoney);
+        }
     }
 
     private void oneMoreCards() {

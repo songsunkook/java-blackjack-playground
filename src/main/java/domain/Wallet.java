@@ -27,8 +27,16 @@ public class Wallet {
         if (theSameTime) {
             return;
         }
-        gain += (int)(money * 0.5);
-        money *= 1.5;
+        gain += (int)(money * 1.5);
+        money += 1.5 * money;
+    }
+
+    public void firstTurnBlackJackFrom(boolean theSameTime, int money) {
+        if (theSameTime) {
+            return;
+        }
+        gain -= (int)(money * 1.5);
+        money -= 1.5 * money;
     }
 
     public void lose() {
