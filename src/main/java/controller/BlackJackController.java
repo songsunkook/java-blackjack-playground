@@ -18,7 +18,10 @@ public class BlackJackController {
     public void startGame() {
         setPerson();
         divideTwoCards();
-        checkBlackJacks();
+        if (checkBlackJacks()) {
+            finalProfits();
+            return;
+        }
         oneMoreCards();
         totalResults();
         finalProfits();
@@ -30,6 +33,12 @@ public class BlackJackController {
         person.add(new Player());
         setNames();
         setMoneys();
+    }
+
+    public void setPerson(Dealer dealer, Player player1, Player player2) {
+        person.add(dealer);
+        person.add(player1);
+        person.add(player2);
     }
 
     private void setNames() {
@@ -78,12 +87,17 @@ public class BlackJackController {
         );
     }
 
-    private void checkBlackJacks() {
-        checkBlackJack(1);
-        checkBlackJack(2);
+    public boolean checkBlackJacks() {
+        if (checkBlackJack(1)) {
+            return true;
+        }
+        if (checkBlackJack(2)) {
+            return true;
+        }
+        return false;
     }
 
-    private void checkBlackJack(int index) {
+    private boolean checkBlackJack(int index) {
         int playerCardNumber = person.get(index).getTotalNumber();
         int dealerCardNumber = person.get(0).getTotalNumber();
         int playerMoney = person.get(index).getMoney();
@@ -91,11 +105,13 @@ public class BlackJackController {
         if (playerCardNumber == 21) {
             if (dealerCardNumber == 21) {
                 person.get(index).firstTurnBlackJackFrom(true);
-                ((Dealer)person.get(index)).firstTurnBlackJackFrom(true, playerMoney);
+                ((Dealer) person.get(0)).firstTurnBlackJackFrom(true, playerMoney);
             }
             person.get(index).firstTurnBlackJackFrom(false);
-            ((Dealer)person.get(index)).firstTurnBlackJackFrom(false, playerMoney);
+            ((Dealer) person.get(0)).firstTurnBlackJackFrom(false, playerMoney);
+            return true;
         }
+        return false;
     }
 
     private void oneMoreCards() {
@@ -144,13 +160,9 @@ public class BlackJackController {
     private void finalProfits() {
         OutputView.println(Message.FINAL_PROFIT.getMessage());
         calculateFinalProfits();
-        finalProfitForDealer();
         outputFinalProfits();
     }
 
-    private void finalProfitForDealer() {
-
-    }
 
     private void calculateFinalProfits() {
         calculateFinalProfit(1);
@@ -164,21 +176,21 @@ public class BlackJackController {
 
         if (!person.get(index).survive()) {
             person.get(index).lose();
-            ((Dealer)person.get(0)).win(playerMoney);
+            ((Dealer) person.get(0)).win(playerMoney);
             return;
         }
         if (playerTotalNumber > dealerTotalNumber) {
             person.get(index).win();
-            ((Dealer)person.get(0)).lose(playerMoney);
+            ((Dealer) person.get(0)).lose(playerMoney);
             return;
         }
         if (playerTotalNumber < dealerTotalNumber) {
             person.get(index).lose();
-            ((Dealer)person.get(0)).win(playerMoney);
+            ((Dealer) person.get(0)).win(playerMoney);
         }
     }
 
-    private void outputFinalProfits() {
+    public void outputFinalProfits() {
         outputFinalProfit(0);
         outputFinalProfit(1);
         outputFinalProfit(2);
