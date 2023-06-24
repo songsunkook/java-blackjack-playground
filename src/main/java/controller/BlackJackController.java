@@ -9,6 +9,8 @@ import view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class BlackJackController {
     List<Person> person = new ArrayList<>();
@@ -16,6 +18,7 @@ public class BlackJackController {
     public void startGame() {
         setPerson();
         divideTwoCards();
+        oneMoreCards();
     }
 
     private void setPerson() {
@@ -66,5 +69,25 @@ public class BlackJackController {
                 Message.DELIMITER.getMessage(),
                 cards
         );
+    }
+
+    private void oneMoreCards() {
+        oneMoreCard(1);
+        oneMoreCard(2);
+    }
+
+    private void oneMoreCard(int index) {
+        do {
+             OutputView.println(Message.INPUT_ONE_MORE_CARD.getMessage(person.get(index).getName()));
+             if (!InputView.inputOneMoreCard()) {
+                 break;
+             }
+             person.get(index).drawCard(1);
+             outputCards(index);
+        } while (person.get(index).survive());
+
+        if(!person.get(index).survive()) {
+            OutputView.println(Message.GAME_OVER.getMessage(person.get(index).getName()));
+        }
     }
 }

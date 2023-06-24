@@ -20,4 +20,8 @@ public class InputView {
     public static int inputMoney() {
         return scanner.nextInt();
     }
+
+    public static boolean inputOneMoreCard() {
+        return scanner.next().equals("y");
+    }
 }

@@ -5,6 +5,7 @@ public enum Message {
     INPUT_MONEY("%s의 배팅 금액은?"),
     HAND_OUT_CARDS("%s와 %s, %s에게 2장의 나누었습니다."),
     INPUT_ONE_MORE_CARD("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)"),
+    GAME_OVER("%s는 21을 초과하여 패배하였습니다."),
     DEALER_ONE_MORE_CARD("%s는 16이하라 한장의 카드를 더 받았습니다."),
     FINAL_PROFIT("## 최종 수익"),
 
@@ -33,6 +34,9 @@ public enum Message {
             return String.format(message, name);
         }
         if (message.equals(INPUT_ONE_MORE_CARD.getMessage())) {
+            return String.format(message, name);
+        }
+        if (message.equals(GAME_OVER.getMessage())) {
             return String.format(message, name);
         }
         return message;

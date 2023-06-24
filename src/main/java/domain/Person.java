@@ -32,4 +32,12 @@ public class Person {
     public int cardAmount() {
         return deck.size();
     }
+
+    public boolean survive() {
+        return deck.getTotalNumber() < 21;
+    }
+
+    public boolean blackJack() {
+        return deck.getTotalNumber() == 21;
+    }
 }
