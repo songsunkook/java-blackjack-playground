@@ -20,6 +20,7 @@ public class BlackJackController {
         divideTwoCards();
         oneMoreCards();
         totalResults();
+        finalProfits();
     }
 
     private void setPerson() {
@@ -40,6 +41,7 @@ public class BlackJackController {
     }
 
     private void setMoneys() {
+        person.get(0).setMoney(0);
         setMoney(1);
         setMoney(2);
     }
@@ -116,5 +118,52 @@ public class BlackJackController {
     private void totalResult(int index) {
         outputCards(index);
         OutputView.println(Message.RESULT.getMessage(person.get(index).getTotalNumber()));
+    }
+
+    private void finalProfits() {
+        OutputView.println(Message.FINAL_PROFIT.getMessage());
+        calculateFinalProfits();
+        finalProfitForDealer();
+        outputFinalProfits();
+    }
+
+    private void finalProfitForDealer() {
+
+    }
+
+    private void calculateFinalProfits() {
+        calculateFinalProfit(1);
+        calculateFinalProfit(2);
+    }
+
+    private void calculateFinalProfit(int index) {
+        int playerTotalNumber = person.get(index).getTotalNumber();
+        int dealerTotalNumber = person.get(0).getTotalNumber();
+        int playerMoney = person.get(index).getMoney();
+
+        if (!person.get(index).survive()) {
+            person.get(index).lose();
+            ((Dealer)person.get(0)).win(playerMoney);
+            return;
+        }
+        if (playerTotalNumber > dealerTotalNumber) {
+            person.get(index).win();
+            ((Dealer)person.get(0)).lose(playerMoney);
+            return;
+        }
+        if (playerTotalNumber < dealerTotalNumber) {
+            person.get(index).lose();
+            ((Dealer)person.get(0)).win(playerMoney);
+        }
+    }
+
+    private void outputFinalProfits() {
+        outputFinalProfit(0);
+        outputFinalProfit(1);
+        outputFinalProfit(2);
+    }
+
+    private void outputFinalProfit(int index) {
+        OutputView.println(person.get(index).getName() + Message.DELIMITER.getMessage() + " " + person.get(index).getGain());
     }
 }
