@@ -74,6 +74,10 @@ public class BlackJackController {
     private void oneMoreCards() {
         oneMoreCard(1);
         oneMoreCard(2);
+        OutputView.println();
+        if (person.get(0).cardAmount() <= 16) {
+            oneMoreCardForDealer();
+        }
     }
 
     private void oneMoreCard(int index) {
@@ -89,5 +93,11 @@ public class BlackJackController {
         if(!person.get(index).survive()) {
             OutputView.println(Message.GAME_OVER.getMessage(person.get(index).getName()));
         }
+    }
+
+    private void oneMoreCardForDealer() {
+        OutputView.println(Message.DEALER_ONE_MORE_CARD.getMessage());
+        person.get(0).drawCard(1);
+        OutputView.println();
     }
 }
