@@ -40,6 +40,9 @@ public class Card {
     }
 
     public int getNumber() {
+        if (number > 10) {
+            return 10;
+        }
         return number;
     }
 }
