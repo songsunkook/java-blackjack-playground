@@ -10,11 +10,14 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static List<String> inputNames() {
-        OutputView.println(Message.INPUT_NAME.getMessage());
         String[] input = scanner.nextLine().split(",");
         List<String> result = new ArrayList<>();
         result.add(input[0]);
         result.add(input[1]);
         return result;
+    }
+
+    public static int inputMoney() {
+        return scanner.nextInt();
     }
 }

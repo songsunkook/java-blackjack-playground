@@ -20,4 +20,8 @@ public class Person {
     public String getCardInfo(int index) {
         return deck.getCardInfo(index);
     }
+
+    public String getName() {
+        return name.get();
+    }
 }
