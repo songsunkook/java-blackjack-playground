@@ -31,9 +31,9 @@ public class PersonTest {
 
     private static Stream<Arguments> cardArguments() {
         return Stream.of(
-                Arguments.of(1, Mark.DIAMOND, "A다이아몬드"),
-                Arguments.of(7, Mark.SPADE, "7스페이드"),
-                Arguments.of(10, Mark.HEART, "10하트")
+                Arguments.of(new Card(1, Mark.CLOVER), new Card(1, Mark.DIAMOND), new Card(1, Mark.SPADE)),
+                Arguments.of(new Card(2, Mark.HEART), new Card(3, Mark.CLOVER), new Card(13, Mark.DIAMOND)),
+                Arguments.of(new Card(10, Mark.DIAMOND), new Card(11, Mark.SPADE), new Card(12, Mark.CLOVER))
         );
     }
 }
