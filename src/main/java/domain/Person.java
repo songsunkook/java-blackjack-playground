@@ -24,4 +24,12 @@ public class Person {
     public String getName() {
         return name.get();
     }
+
+    public void drawCard(int amount) {
+        deck.drawCard(amount);
+    }
+
+    public int cardAmount() {
+        return deck.size();
+    }
 }

@@ -36,4 +36,8 @@ public class Deck {
 
         return new Card(cardIndex, cardMark);
     }
+
+    public int size() {
+        return cards.size();
+    }
 }

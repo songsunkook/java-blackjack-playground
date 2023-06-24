@@ -11,8 +11,8 @@ public enum Message {
     RESULT("%s - 결과%s %d"),
     DEALER("딜러"),
     CARD("카드"),
-    DELIMITER(": "),
-    COMMA(", "),
+    DELIMITER(":"),
+    COMMA(","),
     ;
 
     private final String message;
