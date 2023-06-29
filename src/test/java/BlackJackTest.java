@@ -1,7 +1,6 @@
-package controller;
-
 import constant.Message;
 import constant.card.Mark;
+import controller.BlackJackController;
 import domain.Card;
 import domain.Dealer;
 import domain.Player;
@@ -14,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-class BlackJackServiceTest {
+class BlackJackTest {
     BlackJackController blackJackController = new BlackJackController();
     BlackJackService blackJackService = new BlackJackService();
 
