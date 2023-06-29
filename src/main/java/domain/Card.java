@@ -19,7 +19,7 @@ public class Card {
     }
 
     private String getNumberName() {
-        if (number == 1 || number > 10) {
+        if (number == Number.ACE.getNumber() || number >= Number.JACK.getNumber()) {
             char result = Stream.of(Number.values())
                     .filter(numberElement -> numberElement.getNumber() == number)
                     .findFirst()
@@ -40,8 +40,8 @@ public class Card {
     }
 
     public int getNumber() {
-        if (number > 10) {
-            return 10;
+        if (number > Number.JACK.getNumber()) {
+            return Number.JACK.getNumber();
         }
         return number;
     }

@@ -1,5 +1,6 @@
 package domain;
 
+import constant.Constants;
 import constant.card.Mark;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Deck {
     private Card randomCard() {
         Random random = new Random();
 
-        int cardIndex = random.nextInt(13) + 1;
+        int cardIndex = random.nextInt(Constants.TOTAL_NUMBER_OF_CARDS.get()) + 1;
         Mark cardMark = Mark.values()[random.nextInt(Mark.values().length)];
 
         return new Card(cardIndex, cardMark);

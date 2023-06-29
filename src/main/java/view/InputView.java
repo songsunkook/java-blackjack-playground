@@ -1,16 +1,17 @@
 package view;
 
-import constant.Message;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
+    private static final String agree = "y";
+    private static final String disagree = "n";
+    private static final String splitter = ",";
     private static final Scanner scanner = new Scanner(System.in);
 
     public static List<String> inputNames() {
-        String[] input = scanner.nextLine().split(",");
+        String[] input = scanner.nextLine().split(splitter);
         List<String> result = new ArrayList<>();
         result.add(input[0]);
         result.add(input[1]);
@@ -22,6 +23,6 @@ public class InputView {
     }
 
     public static boolean inputOneMoreCard() {
-        return scanner.next().equals("y");
+        return scanner.next().equals(agree);
     }
 }

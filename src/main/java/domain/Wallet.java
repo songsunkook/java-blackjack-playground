@@ -1,6 +1,10 @@
 package domain;
 
 public class Wallet {
+    private static final int winMagnification = 2;
+    private static final int loseMagnification = -1;
+    private static final double blackJackMagnification = 1.5;
+
     private int money;
     private int gain = 0;
 
@@ -15,7 +19,7 @@ public class Wallet {
 
     public void win() {
         gain += money;
-        money *= 2;
+        money *= winMagnification;
     }
 
     public void win(int money) {
@@ -27,26 +31,26 @@ public class Wallet {
         if (theSameTime) {
             return;
         }
-        gain += (int)(money * 1.5);
-        money += 1.5 * money;
+        gain += (int)(money * blackJackMagnification);
+        money += money * blackJackMagnification;
     }
 
     public void firstTurnBlackJackFrom(boolean theSameTime, int money) {
         if (theSameTime) {
             return;
         }
-        gain -= (int)(money * 1.5);
-        money -= 1.5 * money;
+        gain -= (int)(money * blackJackMagnification);
+        this.money -= money * blackJackMagnification;
     }
 
     public void lose() {
-        gain -= money;
-        money = 0;
+        gain += money * loseMagnification;
+        money += money * loseMagnification;
     }
 
     public void lose(int money) {
-        gain -= money;
-        this.money -= money;
+        gain += money * loseMagnification;
+        this.money += money * loseMagnification;
     }
 
     public int getGain() {

@@ -1,5 +1,8 @@
 package domain;
 
+import constant.Constants;
+import constant.card.Number;
+
 import java.util.stream.IntStream;
 
 public class Person {
@@ -27,6 +30,10 @@ public class Person {
         return name.get();
     }
 
+    public void drawCard() {
+        deck.drawCard(1);
+    }
+
     public void drawCard(int amount) {
         deck.drawCard(amount);
     }
@@ -36,19 +43,19 @@ public class Person {
     }
 
     public boolean survive() {
-        return deck.getTotalNumber() <= 21;
+        return deck.getTotalNumber() <= Constants.BLACKJACK.get();
     }
 
     public boolean blackJack() {
-        return deck.getTotalNumber() == 21;
+        return deck.getTotalNumber() == Constants.BLACKJACK.get();
     }
 
     public int getTotalNumber() {
         int result = deck.getTotalNumber();
         for (int i = 0; i < deck.size(); i++) {
-            if (deck.getCardNumber(i) == 1) {
-                if (result + 10 <= 21) {
-                    return result + 10;
+            if (deck.getCardNumber(i) == Number.ACE.getNumber()) {
+                if (result + Constants.BIG_ACE_MINUS_SMALL_ACE.get() <= Constants.BLACKJACK.get()) {
+                    return result + Constants.BIG_ACE_MINUS_SMALL_ACE.get();
                 }
             }
         }

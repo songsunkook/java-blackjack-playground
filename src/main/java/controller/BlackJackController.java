@@ -1,5 +1,6 @@
 package controller;
 
+import constant.Constants;
 import constant.Message;
 import domain.Dealer;
 import domain.Person;
@@ -98,12 +99,10 @@ public class BlackJackController {
     }
 
     private boolean checkBlackJack(int index) {
-        int playerCardNumber = person.get(index).getTotalNumber();
-        int dealerCardNumber = person.get(0).getTotalNumber();
         int playerMoney = person.get(index).getMoney();
 
-        if (playerCardNumber == 21) {
-            if (dealerCardNumber == 21) {
+        if (person.get(index).blackJack()) {
+            if (person.get(0).blackJack()) {
                 person.get(index).firstTurnBlackJackFrom(true);
                 ((Dealer) person.get(0)).firstTurnBlackJackFrom(true, playerMoney);
             }
@@ -118,7 +117,7 @@ public class BlackJackController {
         oneMoreCard(1);
         oneMoreCard(2);
         OutputView.println();
-        if (person.get(0).cardAmount() <= 16) {
+        if (person.get(0).cardAmount() < Constants.DEALER_DRAWS_ANOTHER_CARD.get()) {
             oneMoreCardForDealer();
         }
     }
@@ -141,7 +140,7 @@ public class BlackJackController {
 
     private void oneMoreCardForDealer() {
         OutputView.println(Message.DEALER_ONE_MORE_CARD.getMessage());
-        person.get(0).drawCard(1);
+        person.get(0).drawCard();
         OutputView.println();
     }
 
