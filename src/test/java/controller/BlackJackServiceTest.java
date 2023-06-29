@@ -4,21 +4,19 @@ import constant.Message;
 import constant.card.Mark;
 import domain.Card;
 import domain.Dealer;
-import domain.Person;
 import domain.Player;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import service.BlackJackService;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class BlackJackControllerTest {
+class BlackJackServiceTest {
     BlackJackController blackJackController = new BlackJackController();
+    BlackJackService blackJackService = new BlackJackService();
 
     @ParameterizedTest
     @MethodSource("cardArguments")
@@ -44,7 +42,7 @@ class BlackJackControllerTest {
         player1.addCard(cards3.get(0));
         player2.addCard(cards3.get(1));
 
-        blackJackController.setPerson(dealer, player1, player2);
+        blackJackService.setPerson(dealer, player1, player2);
         blackJackController.checkBlackJacks();
         blackJackController.outputFinalProfits();
     }

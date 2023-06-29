@@ -30,10 +30,6 @@ public class Person {
         return name.get();
     }
 
-    public void drawCard() {
-        deck.drawCard(1);
-    }
-
     public void drawCard(int amount) {
         deck.drawCard(amount);
     }
