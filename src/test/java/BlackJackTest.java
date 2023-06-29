@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 class BlackJackTest {
-    BlackJackController blackJackController = new BlackJackController();
-    BlackJackService blackJackService = new BlackJackService();
-
     @ParameterizedTest
     @MethodSource("cardArguments")
     public void 블랙잭(List<Card> cards1, List<Card> cards2, List<Card> cards3) {
@@ -41,7 +38,8 @@ class BlackJackTest {
         player1.addCard(cards3.get(0));
         player2.addCard(cards3.get(1));
 
-        blackJackService.setPerson(dealer, player1, player2);
+        BlackJackService blackJackService = new BlackJackService(dealer, player1, player2);
+        BlackJackController blackJackController = new BlackJackController(blackJackService);
         blackJackController.checkBlackJacks();
         blackJackController.outputFinalProfits();
     }

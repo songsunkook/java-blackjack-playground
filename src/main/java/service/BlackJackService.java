@@ -22,7 +22,7 @@ public class BlackJackService {
         person.add(new Player());
     }
 
-    public void setPerson(Dealer dealer, Player player1, Player player2) {
+    public BlackJackService(Dealer dealer, Player player1, Player player2) {
         person.add(dealer);
         person.add(player1);
         person.add(player2);
@@ -34,9 +34,6 @@ public class BlackJackService {
         person.get(2).setName(names.get(1));
     }
 
-    public void setMoneys() {
-        person.get(0).setMoney(0);
-    }
 
     public void setMoney(int index, int money) {
         person.get(index).setMoney(money);

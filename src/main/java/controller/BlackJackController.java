@@ -2,21 +2,22 @@ package controller;
 
 import constant.Constants;
 import constant.Message;
-import domain.Dealer;
-import domain.Person;
-import domain.Player;
 import service.BlackJackService;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BlackJackController {
-    //private List<Person> person = new ArrayList<>();
-    private final BlackJackService blackJackService = new BlackJackService();
+    private final BlackJackService blackJackService;
+
+    public BlackJackController() {
+        blackJackService = new BlackJackService();
+    }
+
+    public BlackJackController(BlackJackService blackJackService) {
+        this.blackJackService = blackJackService;
+    }
 
     public void startGame() {
         setPerson();
