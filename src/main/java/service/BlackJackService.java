@@ -76,22 +76,32 @@ public class BlackJackService {
     public void calculateFinalProfit(int index) {
         int playerTotalNumber = person.get(index).getTotalNumber();
         int dealerTotalNumber = person.get(Constants.DEALER_PERSON_INDEX.get()).getTotalNumber();
-        int playerMoney = person.get(index).getMoney();
 
         if (!person.get(index).survive()) {
-            person.get(index).lose();
-            ((Dealer) person.get(Constants.DEALER_PERSON_INDEX.get())).win(playerMoney);
+            lose(index);
+            return;
+        }
+        if (!person.get(Constants.DEALER_PERSON_INDEX.get()).survive()) {
+            win(index);
             return;
         }
         if (playerTotalNumber > dealerTotalNumber) {
-            person.get(index).win();
-            ((Dealer) person.get(Constants.DEALER_PERSON_INDEX.get())).lose(playerMoney);
+            win(index);
             return;
         }
         if (playerTotalNumber < dealerTotalNumber) {
-            person.get(index).lose();
-            ((Dealer) person.get(Constants.DEALER_PERSON_INDEX.get())).win(playerMoney);
+            lose(index);
         }
+    }
+
+    private void win(int index) {
+        ((Dealer) person.get(Constants.DEALER_PERSON_INDEX.get())).lose(person.get(index).getMoney());
+        person.get(index).win();
+    }
+
+    private void lose(int index) {
+        ((Dealer) person.get(Constants.DEALER_PERSON_INDEX.get())).win(person.get(index).getMoney());
+        person.get(index).lose();
     }
 
     public String inputMoneyMessage(int index) {

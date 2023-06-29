@@ -33,15 +33,15 @@ public class Card {
 
     private String getMarkName() {
         return Stream.of(Mark.values())
-                .filter(markElemnet -> markElemnet == mark)
+                .filter(markElement -> markElement == mark)
                 .findFirst()
                 .get()
                 .getMessage();
     }
 
     public int getNumber() {
-        if (number > Number.JACK.getNumber()) {
-            return Number.JACK.getNumber();
+        if (number > 10) {
+            return 10;
         }
         return number;
     }
